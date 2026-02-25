@@ -77,6 +77,7 @@ async def main():
             if hasattr(ecoflowWrapper.ef_device, method_name):
                 method = getattr(ecoflowWrapper.ef_device, method_name)
                 await method(value)
+                _LOGGER.info("Done")
             else:
                 _LOGGER.error("Error: %s is not a valid command.", method_name)
         else:
@@ -133,7 +134,7 @@ class Ecoflow:
                 field_name = field.public_name
                 try:
                     field_value = getattr(self.ef_device, field_name)
-                    print(f"{field_name}: {field_value}")
+                    # print(f"{field_name}: {field_value}")
                 except AttributeError:
                     pass
 
