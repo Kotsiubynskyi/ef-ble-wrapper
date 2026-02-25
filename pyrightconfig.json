@@ -1,0 +1,5 @@
+{
+  "extraPaths": [
+    "./ha_ef_ble/custom_components/ef_ble"
+  ]
+}

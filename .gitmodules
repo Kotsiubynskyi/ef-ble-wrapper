@@ -1,0 +1,3 @@
+[submodule "ha-ef-ble"]
+	path = ha_ef_ble
+	url = https://github.com/rabits/ha-ef-ble.git
