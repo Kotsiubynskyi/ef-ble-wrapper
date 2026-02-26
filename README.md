@@ -11,6 +11,7 @@ git clone --recursive https://github.com/Kotsiubynskyi/ef-ble-wrapper.git
 
 ### Setup:
 ```bash
+sudo apt update; apt install bluez bluetooth
 cd ef-ble-wrapper
 python3 -m venv .venv
 source .venv/bin/activate
@@ -18,13 +19,12 @@ pip install ./ha_ef_ble
 ```
 
 ## Run
-
 To fetch data — run script with 2 args only
 ```bash
 python3 ef_control.py -u <ecoflow_user_id> -m <ecoflow_ble_mac>
 ```
 
-To control device add 3rd arg — control command:
+To control device — add 3rd arg (control command):
 ```bash
 python3 ef_control.py -u <ecoflow_user_id> -m <ecoflow_ble_mac> -c enable_ac_ports=True
 ```
