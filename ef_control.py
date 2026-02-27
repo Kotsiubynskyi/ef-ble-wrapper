@@ -8,12 +8,11 @@ import sys
 base_path = os.path.abspath("./ha_ef_ble/custom_components/ef_ble")
 
 if base_path not in sys.path:
-    sys.path.insert(0, base_path)  # Use insert(0) to give it priority
+    sys.path.insert(0, base_path)
 
 import eflib
 from bleak import BleakScanner
 from eflib import DeviceBase, NewDevice
-from eflib.devices.river2 import Device
 from eflib.props.raw_data_props import RawDataProps
 
 _LOGGER = logging.getLogger()
@@ -88,7 +87,7 @@ async def main():
 
 
 class Ecoflow:
-    ef_device: Device | None
+    ef_device: DeviceBase | None
     user_id: str
     ef_mac: str
 
@@ -110,15 +109,13 @@ class Ecoflow:
         if device := eflib.get_fixed_length_coding_device(self.ef_device):
             device.on_message_processed(self.hande_data_parsed)
 
-    async def find_ecoflow(self) -> Device | None:
+    async def find_ecoflow(self) -> DeviceBase | None:
         _LOGGER.debug("Searching for EF with BLE MAC %s", self.ef_mac)
 
         scanner = BleScanner()
         if ef := await scanner.discover_devices(self.ef_mac):
             await ef.connect(self.user_id, 2, 10)
             await ef.wait_until_authenticated_or_error()
-
-        if isinstance(ef, Device):
             self.ef_device = ef
             return ef
 
